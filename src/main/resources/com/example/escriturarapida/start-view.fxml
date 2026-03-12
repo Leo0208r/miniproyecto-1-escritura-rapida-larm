@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="599.0" style="-fx-background-color: #1a1a2e;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escriturarapida.controller.StartController">
+   <children>
+      <Button layoutX="200.0" layoutY="221.0" mnemonicParsing="false" onAction="#onHandleValidate" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-size: 18; -fx-background-radius: 10; -fx-max-width: 200; -fx-padding: 12 30; -fx-scale-x: 1.05; -fx-scale-y: 1.05;" text="▶ JUGAR">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label layoutX="148.0" layoutY="39.0" style="-fx-font-size: 40; -fx-text-fill: #e94560; -fx-font-weight: bold;" text="Escritura Rapida">
+         <font>
+            <Font name="Berlin Sans FB" size="44.0" />
+         </font></Label>
+      <Label layoutX="121.0" layoutY="150.0" style="-fx-text-fill: #a8a8b3;" text="¡Que tan rapido puedes esccribir?">
+         <font>
+            <Font name="Berlin Sans FB" size="27.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
