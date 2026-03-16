@@ -1,0 +1,6 @@
+module:com.example.escriturarapida
+com.example.escriturarapida
+com.example.escriturarapida.controller
+com.example.escriturarapida.model
+com.example.escriturarapida.model.words
+com.example.escriturarapida.view
