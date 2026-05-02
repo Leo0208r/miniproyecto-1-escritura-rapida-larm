@@ -7,11 +7,13 @@ import com.example.escriturarapida.view.EndStage;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -55,7 +57,7 @@ public class GameController {
     private Label levelLabel;
     /** Label that shows feedback of the answer (correct/incorrect). */
     @FXML
-    private Label FeedBackLabel;
+    private Label feedBackLabel;
 
     /**
      * Initialization method called automatically by JavaFX when loading the FXML.
@@ -71,16 +73,13 @@ public class GameController {
         words= new Words();
         level=new Level();
         wordTwoLabel.setVisible(false);
-        FeedBackLabel.setVisible(false);
+        feedBackLabel.setVisible(false);
         time.totalSeconds();
         loadTime();
         loadRandomWord();
-        wordTextField.setOnKeyPressed((KeyEvent event) -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                validateInput();
-                event.consume();
-            }
-        });
+        wordTextField.setOnKeyPressed(new EnterKeyHandler());
+        wordLabel.setOnMouseEntered(new WordLabelMouseHandler());
+        wordLabel.setOnMouseExited(new WordLabelMouseHandler());
     }
 
     /**
@@ -200,9 +199,9 @@ public class GameController {
      * Shows a success message in {@code FeedBackLabel} with green text.
      */
     public void showSuccesMessage(){
-        FeedBackLabel.setText("Bien hecho");
-        FeedBackLabel.setStyle("-fx-text-fill:#4CAF50;");
-        FeedBackLabel.setVisible(true);
+        feedBackLabel.setText("Bien hecho");
+        feedBackLabel.setStyle("-fx-text-fill:#4CAF50;");
+        feedBackLabel.setVisible(true);
 
     }
 
@@ -210,9 +209,9 @@ public class GameController {
      * Shows an error message in {@code FeedBackLabel} with red text.
      */
     public void showErrorMessage(){
-        FeedBackLabel.setText("Incorrecto");
-        FeedBackLabel.setStyle("-fx-text-fill:#ff5252;");
-        FeedBackLabel.setVisible(true);
+        feedBackLabel.setText("Incorrecto");
+        feedBackLabel.setStyle("-fx-text-fill:#ff5252;");
+        feedBackLabel.setVisible(true);
     }
 
     /**
@@ -237,7 +236,7 @@ public class GameController {
     public void changeVisibleMessage(){
         timeline= new Timeline(
                 new KeyFrame(Duration.seconds(1), actionEvent ->{
-                    FeedBackLabel.setVisible(false);
+                    feedBackLabel.setVisible(false);
                     wordTwoLabel.setVisible(false);
                 })
         );
@@ -268,5 +267,47 @@ public class GameController {
         );
         timeLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: #e94560;");
 
+    }
+
+    /**
+     * Internal class that handles the ENTER key press event in the text field.
+     * <p>
+     *     When the player presses ENTER, delegates validation
+     *     to {@link GameController#validateInput()}.
+     * </p>
+     */
+    private class EnterKeyHandler implements EventHandler<KeyEvent> {
+        /**
+         * Handles the key press event.
+         * @param event The keyboard event captured in the TextField.
+         */
+        @Override
+        public void handle(KeyEvent event) {
+            if (event.getCode() == KeyCode.ENTER) {
+                validateInput();
+                event.consume();
+            }
+        }
+    }
+    /**
+     * Internal class that handles mouse events over {@code wordLabel}.
+     * <p>
+     *     Changes the cursor style when the mouse enters or exits the label,
+     *     providing visual feedback to the player.
+     * </p>
+     */
+    private class WordLabelMouseHandler implements EventHandler<MouseEvent> {
+        /**
+         * Handles the mouse entered/exited event.
+         * @param event The mouse event captured on the label.
+         */
+        @Override
+        public void handle(MouseEvent event) {
+            if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
+                wordLabel.setStyle("-fx-cursor: hand;");
+            } else if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
+                wordLabel.setStyle("");
+            }
+        }
     }
 }

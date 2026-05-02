@@ -39,7 +39,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="FeedBackLabel" alignment="CENTER" layoutX="202.0" layoutY="214.0" prefHeight="43.0" prefWidth="196.0" style="-fx-text-fill: #a8a8b3;" text="FeedBack">
+      <Label fx:id="feedBackLabel" alignment="CENTER" layoutX="202.0" layoutY="214.0" prefHeight="43.0" prefWidth="196.0" style="-fx-text-fill: #a8a8b3;" text="FeedBack">
          <font>
             <Font size="28.0" />
          </font>
